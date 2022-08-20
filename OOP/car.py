@@ -3,14 +3,31 @@ class Car():
 
     def __init__(self, make, model, year):
         """Инициализирует атрибуты описания автомобиля."""
-        self.make = make
-        self.model = model
-        self.year = year
+        self.__make = make
+        self.__model = model
+        self.__year = year
         self.odometer_reading = 0
+
+    def __check_value(year):
+        if (isinstance(year, int)):
+            return True
+        else:
+            return False
+
+    def get_info(self):
+        return self.__make, self.__model, self.__year
+
+    def set_About_Car(self, make, model, year):
+        if(Car.__check_value(year)):
+            self.__model = model
+            self.__make = make
+            self.__year = year
+        else:
+            print("Год введен не числом")
 
     def get_descriptive_name(self):
         """Возвращает аккуратно отформатированное описание."""
-        long_name = str(self.year) + ' ' + self.make + ' ' + self.model
+        long_name = str(self.__year) + ' ' + self.__make + ' ' + self.__model
         return long_name
 
     def read_odometer(self):
@@ -27,8 +44,8 @@ class Car():
             print("You can't roll back an odometer!")
 
     def increment_odometer(self, miles):
-            """Увеличивает показания одометра с заданным приращением."""
-            self.odometer_reading += miles
+        """Увеличивает показания одометра с заданным приращением."""
+        self.odometer_reading += miles
 
     def fill_gas_tank(self, gas_tank):
         print("refuel with gasoline for " + str(gas_tank) + " liters")
@@ -36,12 +53,8 @@ class Car():
 
 my_car = Car('audi', 'a6', 2019)
 print(my_car.get_descriptive_name())
-my_car.read_odometer()
 
-my_car.update_odometer(23)
-my_car.read_odometer()
-my_car.update_odometer(3)
-my_car.increment_odometer(100)
-my_car.read_odometer()
-my_car.fill_gas_tank(40)
+print(my_car.get_info())
 
+my_car.set_About_Car('mazda', 'cx-5', '2015')
+print(my_car.get_info())
